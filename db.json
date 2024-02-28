@@ -1,0 +1,74 @@
+{
+  "books": [
+    {
+      "id": "5e43",
+      "title": "JAVASCRIPT",
+      "author": "O'Reilly",
+      "description": "JavaScript is the programming language of the web",
+      "language": "English",
+      "publish_date": "2024-02-28",
+      "price": 2150,
+      "pages": 209
+    },
+    {
+      "id": "5e55",
+      "author": "Chinua Achebe",
+      "title": "Things Fall Apart",
+      "description": "Things Fall Apart Things Fall Apart",
+      "language": "English",
+      "publish_date": "2024-02-28",
+      "price": 2150,
+      "pages": 209
+    },
+    {
+      "id": "5e500",
+      "author": "Hans Christian Andersen",
+      "title": "Fairy tales",
+      "description": "Fairy tales Fairy tales",
+      "language": "Danish",
+      "publish_date": "2024-02-12",
+      "price": 2050,
+      "pages": 200
+    },
+    {
+      "id": "5e200",
+      "author": "Dante Alighieri",
+      "title": "The Divine Comedy",
+      "description": "The Divine Comedy The Divine Comedy",
+      "language": "Italian",
+      "publish_date": "2023-04-12",
+      "price": 1950,
+      "pages": 2000
+    },
+    {
+      "id": "5e100",
+      "author": "Rakesh",
+      "title": "The Epic Of Gilgamesh",
+      "description": "The Epic Of Gilgamesh The Epic Of Gilgamesh",
+      "language": "Akkadian",
+      "publish_date": "2023-01-12",
+      "price": 1700,
+      "pages": 1200
+    },
+    {
+      "id": "5e00",
+      "author": "Dante Alighieri",
+      "title": "The Book Of Job",
+      "description": "The Book Of Job The Book Of Job",
+      "language": "Hebrew",
+      "publish_date": "2020-01-12",
+      "price": 800,
+      "pages": 50
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

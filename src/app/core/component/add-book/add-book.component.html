@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card my-3">
+        <div class="card-body">
+          <div class="card-title">
+            <strong>Add details of a book</strong>
+          </div>
+          <form [formGroup]="createBook" (ngSubmit)="createBookHandler()">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Book title</label>
+                  <input
+                    type="text"
+                    formControlName="title"
+                    name=""
+                    id=""
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Author</label>
+                  <input
+                    type="text"
+                    formControlName="author"
+                    name=""
+                    id=""
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Book description</label>
+                  <input
+                    type="text"
+                    formControlName="description"
+                    name=""
+                    id=""
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Language</label>
+                  <input
+                    type="text"
+                    formControlName="language"
+                    name=""
+                    id=""
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Pages</label>
+                  <input
+                    type="number"
+                    formControlName="pages"
+                    name=""
+                    id=""
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Book price</label>
+                  <input
+                    type="number"
+                    formControlName="price"
+                    name=""
+                    id=""
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Publish date</label>
+                  <input
+                    type="date"
+                    formControlName="publish_date"
+                    name=""
+                    id=""
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-end">
+                  <button class="btn btn-outline-danger me-2">Cancel</button>
+                  <button class="btn btn-primary" type="submit">
+                    {{ button }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
