@@ -12,8 +12,8 @@ export class BookService {
     return this.http.post(`${this.http_url}`, book);
   }
 
-  update(book: BookVM) {
-    return this.http.put(`${this.http_url}/${book.id}`, book);
+  update(id: string, book: BookVM) {
+    return this.http.put(`${this.http_url}/${id}`, book);
   }
 
   fetch() {
