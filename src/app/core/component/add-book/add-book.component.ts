@@ -13,7 +13,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
   constructor(private bookService: BookService) {}
 
   loadBookSubscription: Subscription | null = null;
-  createBookSubscription: Subscription | null = null;
+
   button = 'Submit';
 
   private get empty_book(): BookVM {
@@ -42,45 +42,45 @@ export class AddBookComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    this.loadBookSubscription = this.bookService.fetch().subscribe({
-      next: (_books) => {
-        this.books = _books as BookVM[];
-      },
-    });
-
+    this.loadBook();
     if (this.bookService.book_edit) {
       this.button = 'Update';
       this.createBook.patchValue(this.bookService.book_edit);
     }
   }
 
+  private loadBook() {
+    this.loadBookSubscription = this.bookService.fetch().subscribe({
+      next: (_books) => {
+        this.books = _books as BookVM[];
+      },
+    });
+  }
+
   createBookHandler(): void {
     if (this.button == 'Submit') {
-      this.createBookSubscription = this.bookService
-        .create(this.createBook.value as BookVM)
-        .subscribe({
-          next: (_book) => {
-            this.books.push(_book as BookVM);
-          },
-        });
-    } else {
-      this.bookService.update(this.bookService.book_edit as BookVM).subscribe({
+      this.bookService.create(this.createBook.value as BookVM).subscribe({
         next: (_book) => {
-          const item_index = this.books.findIndex(
-            (item) => item.id === this.bookService.book_edit?.id
-          );
-          console.log(this.books[item_index], this.createBook.value.author);
-          this.createBook.reset();
+          this.books.push(_book as BookVM);
         },
       });
-      console.log(this.books);
+    } else {
+      let { id, ...book } = this.bookService.book_edit as BookVM;
+      book = this.createBook.value as BookVM;
+      this.bookService.update(id, book as BookVM).subscribe({
+        next: (_book) => {
+          const item_index = this.books.findIndex((b) => b.id === id);
+          this.books[item_index] = _book as BookVM;
+          this.books[item_index].id = id;
+        },
+      });
       this.button = 'Submit';
     }
     this.createBook.reset();
+    this.loadBook();
   }
 
   ngOnDestroy(): void {
     this.loadBookSubscription?.unsubscribe();
-    this.createBookSubscription?.unsubscribe();
   }
 }

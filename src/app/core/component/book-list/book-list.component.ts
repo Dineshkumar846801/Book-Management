@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { BookService } from 'src/app/services/book.services';
 import { BookVM } from 'src/app/modules/bookVM';
 import { Subscription } from 'rxjs';
@@ -15,6 +21,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   books: BookVM[] = [];
 
   loadBookSubscription: Subscription | null = null;
+  deleteBookSubscription: Subscription | null = null;
 
   private get _book(): BookVM {
     return {
@@ -43,7 +50,7 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   deleteClickHandler(book: BookVM) {
     if (confirm('Are you sure want to delete?')) {
-      this.bookService.delete(book).subscribe({
+      this.deleteBookSubscription = this.bookService.delete(book).subscribe({
         next: (_book) => {
           const item_index = this.books.findIndex((b) => b.id == book.id);
           this.books.splice(item_index, 1);
@@ -54,11 +61,15 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   editClickHandler(book: BookVM) {
-    this.router.navigateByUrl('addbook');
-    this.bookService.editBook(book);
+    if(confirm('Are you sure want to edit')){
+      this.router.navigateByUrl('addbook');
+      this.bookService.editBook(book);
+
+    }
   }
 
   ngOnDestroy(): void {
     this.loadBookSubscription?.unsubscribe();
+    this.deleteBookSubscription?.unsubscribe();
   }
 }
