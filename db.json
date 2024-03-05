@@ -1,13 +1,13 @@
 {
   "books": [
     {
-      "title": "JS",
+      "title": "Java Script",
       "author": "Chinua Achebe",
       "description": "Things Fall Apart Things Fall Apart",
       "language": "English",
       "pages": 209,
       "publish_date": "2024-02-28",
-      "price": 2150,
+      "price": 2000,
       "id": "5e55"
     },
     {
@@ -41,7 +41,7 @@
       "pages": 1200
     },
     {
-      "title": "kumar Dinesh",
+      "title": "Dinesh kumar",
       "author": "Dante Alighieri",
       "description": "The Book Of Job The Book Of Job",
       "language": "Hebrew",
