@@ -1,0 +1,37 @@
+<div class="container" style="margin-top: 70px">
+  <div class="row">
+    <div class="col-md-3">
+      <form action="" [formGroup]="findBook" (change)="findBookHandler()">
+        <label
+          >Choose a browser from this list:
+          <input
+            list="browsers"
+            name="myBrowser"
+            class="form-control form-select"
+        /></label>
+        <datalist id="browsers">
+          <option *ngFor="let book of book" value="{{ book }}"></option>
+        </datalist>
+        <div *ngFor="let _book of book">
+          <h6>{{ _book | uppercase }}</h6>
+          <div *ngFor="let book of books">
+            <label for={{book.language}}><input (click)="filterClickHandler()" formControlName="filtered" class="me-2" type="checkbox" name="" id={{book.language}}>{{book.language}}</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-hover">
+            <tbody>
+              <tr *ngFor="let book of books; index as i">
+                <td>{{ book.title }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

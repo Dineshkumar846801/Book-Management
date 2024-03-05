@@ -12,12 +12,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BookService } from './services/book.services';
 import { BookListComponent } from './core/component/book-list/book-list.component';
+import { FindBooksComponent } from './core/component/find-books/find-books.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'addbook', component: AddBookComponent },
   { path: 'booklist', component: BookListComponent },
+  { path: 'findbook', component: FindBooksComponent },
 ];
 
 @NgModule({
@@ -29,6 +31,7 @@ const routes: Routes = [
     FooterComponent,
     AddBookComponent,
     BookListComponent,
+    FindBooksComponent,
   ],
   imports: [
     BrowserModule,
