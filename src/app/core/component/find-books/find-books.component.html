@@ -10,26 +10,55 @@
             class="form-control form-select"
         /></label>
         <datalist id="browsers">
-          <option *ngFor="let book of book" value="{{ book }}"></option>
+          <option
+            *ngFor="let bookkey of bookKeys"
+            value="{{ bookkey }}"
+          ></option>
         </datalist>
-        <div *ngFor="let _book of book">
-          <h6>{{ _book | uppercase }}</h6>
-          <div *ngFor="let book of books">
-            <label for={{book.language}}><input (click)="filterClickHandler()" formControlName="filtered" class="me-2" type="checkbox" name="" id={{book.language}}>{{book.language}}</label>
+        <div *ngFor="let bookkey of bookKeys">
+          <h6 class="mt-2 mb-0">{{ bookkey | uppercase }}</h6>
+          <div *ngFor="let value of getBookValuesByKey(bookkey)">
+            <label for="{{ value }}"><input class="me-2" type="checkbox" name="" id="{{ value }}" />{{value}}</label>
           </div>
         </div>
       </form>
     </div>
     <div class="col-md-9">
-      <div class="card">
-        <div class="card-body">
-          <table class="table table-hover">
-            <tbody>
-              <tr *ngFor="let book of books; index as i">
-                <td>{{ book.title }}</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="card border-0">
+        <div class="card-body border-0">
+          <div class="card border-0 mb-3">
+            <div class="row g-0">
+              <div class="col-md-6" *ngFor="let book of books">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img
+                      src="{{ book.image }}"
+                      class="img-fluid rounded-start"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h6 class="card-title mb-0">
+                        {{ book.title }} ({{ book.language }})
+                      </h6>
+                      <code>{{ book.author }}</code>
+                      <p class="card-text">{{ book.description }}</p>
+                      <p class="card-text">
+                        <small class="text-muted"
+                          >Last updated 3 mins ago</small
+                        >
+                      </p>
+                      <label for=""
+                        ><i class="fa fa-inr me-2" aria-hidden="true"></i
+                        >{{ book.price }}</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

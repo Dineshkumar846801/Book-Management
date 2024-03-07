@@ -22,6 +22,7 @@ export class FindBooksComponent implements OnInit, OnDestroy {
     return {
       id: '',
       title: '',
+      image: '',
       author: '',
       description: '',
       language: '',
@@ -33,24 +34,38 @@ export class FindBooksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadBook();
+    let _bookkeys: string[] = [];
+    this.bookKeys.forEach((book: any) => {
+      if ( book == 'author' || book == 'language' || book == 'price' || book == 'pages' ) {
+        _bookkeys.push(book);
+      }
+    });
+    this.bookKeys = _bookkeys;
   }
 
   books: BookVM[] = [];
-  book = Object.keys(this._book);
+  bookKeys = Object.keys(this._book);
+  // bookKeys = ['title']
+
+  getBookValuesByKey = (key: string) => {
+    if (this.books.length) {
+      //getting values based on particular key
+      return this.books.map((book: any) => book[key]);
+    }
+    return [];
+  };
 
   private loadBook() {
     this.loadBookSubscription = this.bookService.fetch().subscribe({
       next: (_books) => {
-        this.books = _books as BookVM[];
+        this.books = _books;
       },
     });
   }
 
   findBookHandler() {}
 
-  filterClickHandler() {
-    console.log(this.findBook);
-  }
+  filterClickHandler() {}
 
   ngOnDestroy(): void {
     this.loadBookSubscription?.unsubscribe();

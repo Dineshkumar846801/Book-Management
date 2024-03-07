@@ -20,6 +20,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
     return {
       id: '',
       title: '',
+      image:'',
       author: '',
       description: '',
       language: '',
@@ -34,6 +35,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
   createBook = new FormGroup({
     title: new FormControl(''),
     author: new FormControl(''),
+    image:new FormControl(''),  
     description: new FormControl(''),
     language: new FormControl(''),
     pages: new FormControl(),

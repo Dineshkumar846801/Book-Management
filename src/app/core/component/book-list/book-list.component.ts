@@ -27,6 +27,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     return {
       id: '',
       title: '',
+      image:'',
       author: '',
       description: '',
       language: '',
@@ -38,6 +39,8 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadBook();
+
+    
   }
 
   private loadBook() {
