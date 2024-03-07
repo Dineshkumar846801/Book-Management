@@ -17,7 +17,7 @@ export class BookService {
   }
 
   fetch() {
-    return this.http.get(`${this.http_url}`);
+    return this.http.get<BookVM[]>(`${this.http_url}`);
   }
 
   delete(book: BookVM) {

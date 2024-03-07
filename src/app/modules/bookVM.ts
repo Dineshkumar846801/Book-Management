@@ -1,6 +1,7 @@
 export interface BookVM {
   id: string;
   title: string;
+  image:string;
   author: string;
   description: string;
   language: string;
