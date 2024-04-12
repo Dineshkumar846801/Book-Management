@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, find } from 'rxjs';
 import { BookVM } from 'src/app/modules/bookVM';
 import { BookService } from 'src/app/services/book.services';
 
@@ -32,40 +32,102 @@ export class FindBooksComponent implements OnInit, OnDestroy {
     };
   }
 
+  //require for calculation
+  private books: BookVM[] = [];
+  filteredBooks: BookVM[] = [];
+
+  bookKeys: string[] = [];
+
+  booksKeysValues: Record<string, Set<any>> = {};
+  private filterCriteria: Record<string, Set<any>> = {};
+  bookKeyFilter: string[] = [];
+
   ngOnInit(): void {
     this.loadBook();
-    let _bookkeys: string[] = [];
-    this.bookKeys.forEach((book: any) => {
-      if ( book == 'author' || book == 'language' || book == 'price' || book == 'pages' ) {
-        _bookkeys.push(book);
+
+    Object.keys(this._book).forEach((book: any) => {
+      if (
+        book == 'author' ||
+        book == 'language' ||
+        book == 'price' ||
+        book == 'pages'
+      ) {
+        this.bookKeys.push(book);
       }
     });
-    this.bookKeys = _bookkeys;
   }
 
-  books: BookVM[] = [];
-  bookKeys = Object.keys(this._book);
-  // bookKeys = ['title']
-
   getBookValuesByKey = (key: string) => {
-    if (this.books.length) {
-      //getting values based on particular key
-      return this.books.map((book: any) => book[key]);
-    }
-    return [];
+    return Array.from(this.booksKeysValues[key]);
   };
+
+  // do groping ,group by key and his values
+  //eg:. author:['Ram','Shyam', '...'], langulage:['C#', 'Javascript']
+  private doGrouping(books: BookVM[]) {
+    books.forEach((book: any) => {
+      //based on key
+      this.bookKeys.forEach((key) => {
+        if (this.booksKeysValues[key]) {
+          this.booksKeysValues[key].add(book[key]);
+        } else {
+          this.booksKeysValues[key] = this.getSetInitial(book[key]);
+        }
+      });
+    });
+  }
 
   private loadBook() {
     this.loadBookSubscription = this.bookService.fetch().subscribe({
       next: (_books) => {
+        //raw objects
         this.books = _books;
+        this.doGrouping(_books);
+        this.doFilterByBookProperties(true);
       },
     });
   }
 
-  findBookHandler() {}
+  doFilterByBookProperties(returnAllValue: boolean = false) {
+    const matcher = (book: any) => {
+      if (returnAllValue) return true;
 
-  filterClickHandler() {}
+      let result = false;
+      const mainKeys = Object.keys(this.filterCriteria);
+      for (let i = 0; i < mainKeys.length && !result; i++) {
+        const key = mainKeys[i];
+        const bookPropValueByKey = book[key];
+        result = this.filterCriteria[key].has(bookPropValueByKey);
+      }
+
+      return result;
+    };
+
+    this.filteredBooks = this.books.filter((book) => matcher(book));
+  }
+
+  private getSetInitial = (value: string) => {
+    var initial = new Set<string>();
+    initial.add(value);
+    return initial;
+  };
+
+  setCriteria(key: string, value: string, evt: any) {
+    console.log('key', key);
+    console.log('value', value);
+
+    if (evt.currentTarget.checked) {
+      if (this.filterCriteria[key]) this.filterCriteria[key].add(value);
+      else this.filterCriteria[key] = this.getSetInitial(value);
+    } else {
+      this.filterCriteria[key].delete(value);
+    }
+
+    if (Object.keys(this.filterCriteria).length == 0) {
+      this.doFilterByBookProperties(true);
+    } else {
+      this.doFilterByBookProperties();
+    }
+  }
 
   ngOnDestroy(): void {
     this.loadBookSubscription?.unsubscribe();
