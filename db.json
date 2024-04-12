@@ -2,13 +2,13 @@
   "books": [
     {
       "title": "Java Script",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjmJsVDdDqURWxVcLpLahfRGdAp1uspwUvY8am0fFEci0iSrU5eg72PgEyyTciHfHQdcw&usqp=CAU",
       "author": "Chinua Achebe",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjmJsVDdDqURWxVcLpLahfRGdAp1uspwUvY8am0fFEci0iSrU5eg72PgEyyTciHfHQdcw&usqp=CAU",
       "description": "Things Fall Apart Things Fall Apart",
       "language": "English",
       "pages": 209,
       "publish_date": "2024-02-28",
-      "price": 2000,
+      "price": 2,
       "id": "5e55"
     },
     {
@@ -57,13 +57,13 @@
     },
     {
       "title": "Book Systems Analysis and Design ",
-      "author": "Sample book",
+      "author": "Dinesh kumar",
       "image": "https://m.media-amazon.com/images/I/61+ZZUT91hL._AC_UY218_.jpg",
       "description": "Design IGNOU Study Notes with Latest Previous Years Solved Question Papers ",
       "language": "English",
       "pages": 400,
       "publish_date": "2024-03-01",
-      "price": 150,
+      "price": 200,
       "id": "c2cb"
     }
   ],

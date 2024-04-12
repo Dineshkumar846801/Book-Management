@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 70px">
   <div class="row">
     <div class="col-md-3">
-      <form action="" [formGroup]="findBook" (change)="findBookHandler()">
+      <form action="" [formGroup]="findBook">
         <label
           >Choose a browser from this list:
           <input
@@ -18,7 +18,16 @@
         <div *ngFor="let bookkey of bookKeys">
           <h6 class="mt-2 mb-0">{{ bookkey | uppercase }}</h6>
           <div *ngFor="let value of getBookValuesByKey(bookkey)">
-            <label for="{{ value }}"><input class="me-2" type="checkbox" name="" id="{{ value }}" />{{value}}</label>
+            <label for="{{ value }}"
+              ><input
+                class="me-2"
+                type="checkbox"
+                name=""
+                formControlName="filtered"
+                (click)="setCriteria(bookkey, value, $event)"
+                id="{{ value }}"
+              />{{ value }}</label
+            >
           </div>
         </div>
       </form>
@@ -28,9 +37,9 @@
         <div class="card-body border-0">
           <div class="card border-0 mb-3">
             <div class="row g-0">
-              <div class="col-md-6" *ngFor="let book of books">
+              <div class="col-md-6" *ngFor="let book of filteredBooks">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                     <img
                       src="{{ book.image }}"
                       class="img-fluid rounded-start"
